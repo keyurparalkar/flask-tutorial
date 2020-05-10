@@ -1,0 +1,12 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Hello WebApp</title>
+    {% endif %}
+  </head>
+  <body>
+  </body>
+  
+</html>
