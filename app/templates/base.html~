@@ -1,0 +1,18 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - WebApp</title>
+    {% else %}
+    <title>Hello - WebApp</title>
+    {% endif %}
+  </head>
+  
+  <body>
+    <div>
+      <a>MICROBLOG:</a>
+      <hr>
+    </div>
+    {% block content %}{% endblock %}
+  </body>
+  
+</html>

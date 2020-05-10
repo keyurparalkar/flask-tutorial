@@ -9,7 +9,3 @@ def index():
              ,{"author":"Wick","body":"Focus, Commitment, and Sheer will !!"}]
     
     return render_template('index.html',title="KAP",user=user,posts=posts)
-
-
-
-

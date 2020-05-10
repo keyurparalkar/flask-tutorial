@@ -1,15 +1,8 @@
-<html>
-  <head>
-    {% if title %}
-    <title>{{title}} - WebApp</title>
-    {% else %}
-    <title>Hello - WebApp</title>
-    {% endif %}
-  </head>
-  
-  <body>
-    <div>
-      <h1>Hola - {{user.username}}</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+      <h2>Hola - {{user.username}}</h2>
       <br/>
     </div>
 
@@ -26,6 +19,4 @@
       </div>
       {% endfor %}
       </div>
-  </body>
-  
-</html>
+{% endblock %}
