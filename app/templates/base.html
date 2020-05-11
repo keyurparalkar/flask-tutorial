@@ -10,8 +10,26 @@
   <body>
     <div>
       <a href="/"><h1>MICROBLOG</h1></a>
+      <div>
+	<a href="{{ url_for('index') }}">HOME</a>
+	<a href="{{ url_for('login') }}">SIGN IN</a>
+      </div>
+      
       <hr>
     </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>
+	{{message}}
+      </li>      
+      {% endfor %}
+    </ul>
+    {% endif %}    
+    {% endwith %}
+    
     {% block content %}{% endblock %}
   </body>
   
