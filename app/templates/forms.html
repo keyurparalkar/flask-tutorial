@@ -19,9 +19,10 @@
     {% endfor %}
   </p>
 
-  <p>{{ form.remember_me() }}</p>
+  <p>Remember Me {{ form.remember_me() }}</p>
   <p>{{ form.submit() }}</p>
-  
+
+  <a href={{ url_for('register') }}> New User </a>
 </form>
 
 
