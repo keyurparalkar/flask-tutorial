@@ -3,6 +3,12 @@
 {% block content %}
 <div>
   <h1>User: {{user.username}}</h1>
+  <hr>
+  {% for post in posts %}
+  <span>Post: {{post.author}}</span>
+  <span>Author: {{post.post}}</span>
+  <br>
+  {% endfor %}
 </div>
 
 {% endblock %}
