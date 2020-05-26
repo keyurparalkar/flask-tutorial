@@ -10,6 +10,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120),index=True,unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post',backref='author',lazy='dynamic')
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime,default=datetime.utcnow)
     
     def __repr__(self):
         return f'<User {self.username}>'
@@ -23,7 +25,7 @@ class User(UserMixin, db.Model):
     def avatar(self, size):
         print('USER EMAIL = ',self.email)
         return f'https://www.gravatar.com/avatar/{md5(self.email.lower().encode("utf-8")).hexdigest()}?d=identicon&s={size}'
-    
+
 class Post(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     body = db.Column(db.String(140))
