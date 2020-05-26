@@ -28,3 +28,7 @@ class RegistrationForm(FlaskForm):
         if(email_id is not None):
             raise ValidationError('Email Id already existing. Please enter a different email id')
         
+class ProfileEditForm(FlaskForm):
+    username = StringField('Username')
+    about_me = StringField('About Me')
+    submit = SubmitField('Edit Profile')
