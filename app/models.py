@@ -6,7 +6,7 @@ from hashlib import md5
 
 followers = db.Table('followers',
                      db.Column('follower_id',db.ForeignKey('user.id')),
-                     db.Column('follower_id',db.ForeignKey('user.id'))
+                     db.Column('followed_id',db.ForeignKey('user.id'))
 )
 
 class User(UserMixin, db.Model):
@@ -19,7 +19,9 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime,default=datetime.utcnow)
     followed = db.relationship('User',secondary=followers,
                                primaryjoin=(followers.c.follower_id == id),
-                               secondaryjoin=(followers.c.follower_id == id)
+                               secondaryjoin=(followers.c.follower_id == id),
+                               backref=db.backref('followers',lazy='dynamic'),
+                               lazy='dynamic'
     )
     
     def __repr__(self):
@@ -48,7 +50,7 @@ class User(UserMixin, db.Model):
         if self.is_following(user):
             self.followed.remove(user)
 
-    def followed_post(self):
+    def followed_posts(self):
         followed = Post.query.join(followers,
                                (followers.c.followed_id == Post.user_id)).filter(
                                    followers.c.follower_id == self.id)
