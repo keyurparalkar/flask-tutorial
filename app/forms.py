@@ -32,3 +32,7 @@ class ProfileEditForm(FlaskForm):
     username = StringField('Username')
     about_me = StringField('About Me')
     submit = SubmitField('Edit Profile')
+
+
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
