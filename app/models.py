@@ -19,7 +19,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime,default=datetime.utcnow)
     followed = db.relationship('User',secondary=followers,
                                primaryjoin=(followers.c.follower_id == id),
-                               secondaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
                                backref=db.backref('followers',lazy='dynamic'),
                                lazy='dynamic'
     )
@@ -58,8 +58,6 @@ class User(UserMixin, db.Model):
         return followed.union(own).order_by(Post.timestamp.desc())
 
     
-
-
 
 class Post(db.Model):
     id = db.Column(db.Integer,primary_key=True)
