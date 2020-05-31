@@ -1,8 +1,8 @@
 from app import app,db
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm, RegistrationForm, ProfileEditForm, EmptyForm
+from app.forms import LoginForm, RegistrationForm, ProfileEditForm, EmptyForm, BlogPostForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -143,3 +143,17 @@ def unfollow(username):
     else:
         return redirect(url_for('index'))
     
+@app.route('/post_blog',methods=['POST','GET'])
+@login_required
+def post_blog():
+    form = BlogPostForm()
+    if form.validate_on_submit():
+        user = current_user
+        post = Post(body=form.content.data, user_id=user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Blog Post successfully created !')
+        return redirect(url_for('post_blog'))
+        
+    else:
+        return render_template('post.html',form=form)

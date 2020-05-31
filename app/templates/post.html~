@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>
+  {{form.content.label}}
+  <br>
+  {{form.content(cols=32,rows=4)}}
+</p>
+
+{{}}
+{% endblock %}
