@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from app.models import User
 
@@ -35,4 +35,8 @@ class ProfileEditForm(FlaskForm):
 
 
 class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
+
+class BlogPostForm(FlaskForm):
+    content = TextAreaField('Say Something',validators=[DataRequired()])
     submit = SubmitField('Submit')

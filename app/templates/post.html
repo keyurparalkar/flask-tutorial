@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="" method="post">
+<p>
+  {{form.content.label}}
+  <br>
+  {{form.content(cols=50,rows=10)}}
+</p>
+{{form.submit()}}
+</form>
+{% endblock %}
