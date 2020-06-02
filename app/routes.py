@@ -13,7 +13,7 @@ def index():
    # posts = [{'author':'KP','body':'HELLOW ORLD'},
     #        {'author':'JohnWick','body':'Willl'}]
     posts = current_user.followed_posts().all()
-    return render_template('index.html',title="KAP",posts=posts)
+    return render_template('index.html',title="DEVPOST",posts=posts)
 
 
 @app.route('/signin',methods=['GET','POST'])
