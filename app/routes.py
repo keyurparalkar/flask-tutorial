@@ -10,8 +10,9 @@ from datetime import datetime
 @app.route('/index')
 @login_required
 def index():
-    posts = [{'author':'KP','body':'HELLOW ORLD'},
-            {'author':'JohnWick','body':'Willl'}]
+   # posts = [{'author':'KP','body':'HELLOW ORLD'},
+    #        {'author':'JohnWick','body':'Willl'}]
+    posts = current_user.followed_posts().all()
     return render_template('index.html',title="KAP",posts=posts)
 
 
@@ -146,14 +147,14 @@ def unfollow(username):
 @app.route('/post_blog',methods=['POST','GET'])
 @login_required
 def post_blog():
-    form = BlogPostForm()
-    if form.validate_on_submit():
+    form = BlogPostForm(request.form)
+
+    if form.validate() and request.method == 'POST':
         user = current_user
-        post = Post(body=form.content.data, user_id=user.id)
+        post = Post(body=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Blog Post successfully created !')
-        return redirect(url_for('post_blog'))
+        return redirect(url_for('index'))
         
-    else:
-        return render_template('post.html',form=form)
+    return render_template('post.html',form=form)
